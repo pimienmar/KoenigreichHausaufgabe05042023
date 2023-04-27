@@ -2,6 +2,27 @@ import java.util.Scanner;
 
 public class Königreich {
 
+    public static void erzeugeEinwohner(String bevölkerungstyp) {
+        System.out.println("Ein neuer "+bevölkerungstyp+" soll erschaffen werden");
+        System.out.println("Wie soll dieser heißen?: ");
+        Scanner eingabe = new Scanner(System.in);
+        String name = eingabe.nextLine();
+        System.out.println("Der "+bevölkerungstyp+" wird bald " + name + " heißen");
+
+        System.out.println("Bitte Einkommen des "+bevölkerungstyp+"s eingeben: ");
+        int einkommen = eingabe.nextInt();
+
+        Einwohner einwohner = null;
+        if (bevölkerungstyp.equals("König"))
+             einwohner = new König(name, einkommen);
+        else if (bevölkerungstyp.equals("Adel"))
+            einwohner = new Adel(name, einkommen);
+
+        if (einwohner != null)
+            System.out.println("Der "+bevölkerungstyp+" " + einwohner.getName() + " muss " + einwohner.steuer() + " Taler als Steuer zahlen. ");
+    }
+
+
     public static void main(String[] args) {
 
         int auswahl;
@@ -25,32 +46,10 @@ public class Königreich {
         } while (auswahl <= 0 || auswahl >= 6);
 
         if (auswahl == 1) {
-            Einwohner e1 = new König ("leer", 0);
-
-            System.out.println("Ein neuer König wurde erschaffen");
-            System.out.println("Wie soll dieser heißen?: ");
-            Scanner eingabe2 = new Scanner(System.in);
-            e1.setName(eingabe2.nextLine());
-            System.out.println("Der König heißt nun " + e1.getName());
-
-            System.out.println("Bitte Einkommen des Königs eingeben: ");
-            Scanner eingabe3 = new Scanner(System.in);
-            e1.setEinkommen(eingabe3.nextInt());
-            System.out.println("Der König " + e1.getName() + " muss " + e1.steuer() + " Taler als Steuer zahlen. ");
+            erzeugeEinwohner("König");
         }
         if (auswahl == 2) {
-            Einwohner e1 = new Adel ("leer", 0);
-
-            System.out.println("Ein neuer Adliger wurde erschaffen");
-            System.out.println("Wie soll dieser heißen?: ");
-            Scanner eingabe2 = new Scanner(System.in);
-            e1.setName(eingabe2.nextLine());
-            System.out.println("Der Adlige heißt nun " + e1.getName());
-
-            System.out.println("Bitte Einkommen des Adligen eingeben: ");
-            Scanner eingabe3 = new Scanner(System.in);
-            e1.setEinkommen(eingabe3.nextInt());
-            System.out.println("Der Adlige " + e1.getName() + " muss " + e1.steuer() + " Taler als Steuer zahlen. ");
+            erzeugeEinwohner("Adel");
         }
         if (auswahl == 3) {
             Einwohner e1 = new Bauer ("leer", 0);
